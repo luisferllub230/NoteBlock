@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/note-block'),
+      dir: require('path').join(__dirname, './coverage/note-block-angular'),
       subdir: '.',
       reporters: [
         { type: 'html' },
