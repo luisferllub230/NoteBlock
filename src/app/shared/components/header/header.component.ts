@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  loggingValidator = new BehaviorSubject<object>(
+    {
+      isLogging: true,
+      userName: "Luis Fernandez",
+      userEmail: "tes@email.com"
+    })
+
+
+  constructor() { } 
 
   ngOnInit(): void {
   }
+
+  
 
 }
