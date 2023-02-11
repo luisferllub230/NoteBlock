@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "NoteBlock-angular": {
+    "NoteBlock": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/note-block-angular",
+            "outputPath": "dist/note-block",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -69,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "NoteBlock-angular:build:production"
+              "browserTarget": "NoteBlock:build:production"
             },
             "development": {
-              "browserTarget": "NoteBlock-angular:build:development"
+              "browserTarget": "NoteBlock:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -80,7 +80,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "NoteBlock-angular:build"
+            "browserTarget": "NoteBlock:build"
           }
         },
         "test": {
@@ -105,6 +105,6 @@
     }
   },
   "cli": {
-    "analytics": false
+    "analytics": "ee470f60-c8a9-48a6-af1a-2e9870508922"
   }
 }

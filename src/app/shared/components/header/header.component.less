@@ -1,57 +1,86 @@
 .header {
-    background-color: #0B0D17;
-    list-style: none;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    min-height: 72px;
-    border-bottom: #8C30F5 5px solid;
+    padding: 15px 10px 0 50px;
+    margin: 0 20px;
 
     a {
-        color: #ffffff;
         text-decoration: none;
+        color: #000;
+        margin-right: 5px;
     }
 
     ul {
         list-style: none;
-        margin: 0;
-        padding: 0;
         display: flex;
-        justify-content: space-around;
 
         li {
             margin: 0 10px;
         }
     }
 
-    &__logoSection {
+    &__search {
+        width: 50%;
+        margin: 0 20px 0 5px;
+        background-color: #D9D9D9;
         display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+        padding: .5rem;
+        border: solid 1px #cfc6c6;
+        box-shadow: 0px 3px 5px #9592928c;
+        border-radius: 30px;
+        max-width: 500px;
 
-    &__loggingSection {
-        li {
-            background-color: #ffffff;
-            color: #0B0D17;
-            border-radius: 5px;
+        &--icone {
+            padding: 7px;
+            margin: 0 8px;
+            background-color: #474A57;
+            width: 17px;
+            border-radius: 42px;
+            display: flex;
 
-            a {
-                width: 75px;
-                height: 35px;
-                color: #0B0D17;
-                display: flex;
-                justify-content: center;
-                align-items: center;
+            svg {
+                color: white;
             }
         }
 
-        li:last-child {
-            background-color: #8C30F5;
+        input, input:focus {
+            width: 90%;
+            padding: 5px;
+            border: none; 
+            background-color: #D9D9D9;
+            outline: none; 
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-size: 1rem;
+        }
+    }
 
-            a {
-                color: #ffffff;
+    &__user {
+        margin-right: 10px;
+
+        a {
+            display: flex;
+            align-items: center;
+            
+            img {
+                width: 40px;
+                height: 40px;
+                border: #474A57 solid 3px;
+                border-radius: 50%;
+                margin-right: 5px;
+            }
+
+            h1 {
+                margin: 0;
+                font-size: 1.2rem;
+                font-weight: 500;
+            }
+
+            h6 {
+                margin: 0;
+                font-size: .8rem;
+                font-weight: 500;
+                color: #474A57;
             }
         }
     }
