@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-
+import { BehaviorSubject, map, tap  } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -9,19 +8,27 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
 
-  loggingValidator = new BehaviorSubject<object>(
-    {
-      isLogging: true,
-      userName: "Luis Fernandez",
-      userEmail: "tes@email.com"
-    })
+  isLogging = new BehaviorSubject<boolean>(true);
+  isUserImg = new BehaviorSubject<boolean>(false);
 
-
-  constructor() { } 
+  constructor() { }
 
   ngOnInit(): void {
   }
 
-  
+  getIsUserImg(): boolean
+  {
+    return this.isUserImg.value;
+  }
+
+  setIsLogin( newValue:boolean )
+  {
+    this.isLogging.next(newValue);
+  }
+
+  getIsLogging(): Boolean
+  {
+    return this.isLogging.value;
+  }
 
 }

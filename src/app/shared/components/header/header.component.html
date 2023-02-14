@@ -1,23 +1,43 @@
-<ng-container>
+<header>
     <div class="header">
-        <div class="header__infoSection">
+        <div class="header__logo">
+            <a href=""><img src="" alt="Noteblock"></a>
+        </div>
+
+        <div class="header__nav">
             <ul>
-                <li><a href="">Home</a></li>
-                <li><a href="">About us</a></li>
-                <li><a href="">Contact</a></li>
-                <li><a href="">Help</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact us</a></li>
             </ul>
         </div>
-        <div class="header__logoSection">
-            <a href="">
-                <img src="" alt="NoteBlock logo">
-            </a>
+
+        <div class="header__search">
+            <div class="header__search--icone">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                  </svg>
+            </div>
+            <input type="text" placeholder="search your note">
         </div>
-        <div class="header__loggingSection">
-            <ul>
-                <li><a href="">Login</a></li>
-                <li><a href="">Register</a></li>
-            </ul>
-        </div>
+
+        <ng-container *ngIf="isLogging.value else templateA">
+            <div class="header__user">
+                <a href="/profile">
+                    <img src="https://avatars.githubusercontent.com/u/84060723?v=4" alt="user img">
+                    <div class="imgTxt">
+                        <h1>Username</h1>
+                        <h6>last name</h6>
+                    </div>
+                </a>
+            </div>
+        </ng-container>
+
+        <ng-template #templateA>
+            <div class="header__logging">
+                <a href="/login">Login</a>
+                <a href="/register">Register</a>
+            </div>
+        </ng-template>
     </div>
-</ng-container>
+</header>
