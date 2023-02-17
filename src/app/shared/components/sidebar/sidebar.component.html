@@ -1,0 +1,20 @@
+<ng-container>
+    <button class="btn-option">
+        <i class='bx bx-list-ul'></i>
+    </button>
+    <ul>
+        <li *ngFor="let option of optionsList$.value" 
+            [ngClass]="option.listClassName" 
+            [attr.data-parameterId]="option.id"
+            [attr.data-parameterName]="option.name"
+            >
+
+            <a href="">
+                <i [ngClass]="option.icon"></i>
+            </a>
+            <span class="btn-spanOption"
+                [ngClass]="isOpenOptions(option.id ,isOptionOpen$.value) ? 'spanOption-active' : ''"
+                >{{option.name}}</span>
+        </li>
+    </ul>
+</ng-container>
