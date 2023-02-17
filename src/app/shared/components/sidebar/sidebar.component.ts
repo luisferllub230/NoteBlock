@@ -1,7 +1,8 @@
 import { HtmlParser } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, filter, fromEvent, map, pluck } from 'rxjs';
-import { OptionList, OptionValues } from 'src/app/interfaces/globalInterfaces';
+import { OptionList } from 'src/app/interfaces/globalInterfaces';
+import { navOptions } from 'src/app/util/navOptions.enum';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,11 +11,9 @@ import { OptionList, OptionValues } from 'src/app/interfaces/globalInterfaces';
 })
 export class SidebarComponent implements OnInit {
 
-  cache: OptionValues = { optionId: 0, newOptionValue: false };
-  click$ = fromEvent(document, 'mouseover');
   isOptionOpen$ = new BehaviorSubject<boolean>(false);
 
-  //estas obciones van en otra parte  
+  //this options  
   optionsList$ = new BehaviorSubject<OptionList[]>([
     {
       id: 1,
@@ -46,38 +45,27 @@ export class SidebarComponent implements OnInit {
     }
   ]);
 
-  // ver si se puede crear un enum para esto
   options: any = {
-    1: false,
-    2: false,
-    3: false,
-    4: false,
+    [navOptions.optionId1]: false,
+    [navOptions.optionId2]: false,
+    [navOptions.optionId3]: false,
+    [navOptions.optionId4]: false,
   }
 
   constructor() { }
 
   ngOnInit(): void {
 
-    this.click$.pipe(
-
+    fromEvent(this.headerTag, 'mouseover').pipe(
       map((event) => {
-
-        if (!this.getTargetLi(event)) {
-          return { id: 0, option: false };
-        }
-
-        let listAtr: any = this.getTargetLi(event);
-        let idAtr: number = listAtr.getAttribute('data-parameterId')
-
-        return { id: idAtr, option: true };
+        this.getTargetLi(event)
       })
-
-    ).subscribe(({ id, option }) => this.setOptionValues({ optionId: id, newOptionValue: option }));
+    ).subscribe();
 
   }
 
 
-  isOpenOptions(id: number, open: boolean) {
+  isOpenOptions(id: number, open: boolean): boolean {
     if (open) {
       return true;
     }
@@ -85,24 +73,25 @@ export class SidebarComponent implements OnInit {
     return this.options[id];
   }
 
-  getTargetLi(event: Event): HTMLElement | boolean {
-    let target: HTMLElement = event.target as HTMLElement;
-    let listTarget: HTMLElement | null = target.parentElement;
+  getTargetLi(event: Event): void {
 
-    if (target?.tagName == 'A') {
-      listTarget = target.parentElement;
+    let getIdAtr: any = 0;
+    let cp = event.composedPath();
+    let list = document.querySelectorAll('li.btn-option');
+
+    for (let i = 0; i < list.length; i++) {
+      getIdAtr = list[i].getAttribute('data-parameterId');
+
+      if (!cp.some((el) => el === list[i])) {
+        this.options[getIdAtr] = false;
+        continue;
+      }
+
+      this.options[getIdAtr] = true;
     }
-
-    return listTarget?.tagName == 'LI' ? listTarget : false;
   }
 
-  setOptionValues(payloat: OptionValues) {
-    if (!payloat.newOptionValue) {
-      console.log('cache payloat', this.cache)
-      return this.options[this.cache.optionId] = false;
-    }
-
-    this.cache = payloat;
-    return this.options[payloat.optionId] = payloat.newOptionValue;
+  get headerTag(): HTMLCollectionOf<HTMLElement> {
+    return document.getElementsByTagName('nav');
   }
 }

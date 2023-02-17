@@ -1,5 +1,8 @@
 <ng-container>
-    <button class="btn-option">
+    <button 
+        [ngClass]="isOptionOpen$.value ? '.active-allOptions' : ''" 
+        class="btn-option"
+        >
         <i class='bx bx-list-ul'></i>
     </button>
     <ul>
@@ -11,10 +14,11 @@
 
             <a href="">
                 <i [ngClass]="option.icon"></i>
+
+                <span class="btn-spanOption"
+                    [ngClass]="isOpenOptions(option.id ,isOptionOpen$.value) ? 'spanOption-active' : ''"
+                    >{{option.name}}</span>
             </a>
-            <span class="btn-spanOption"
-                [ngClass]="isOpenOptions(option.id ,isOptionOpen$.value) ? 'spanOption-active' : ''"
-                >{{option.name}}</span>
         </li>
     </ul>
 </ng-container>

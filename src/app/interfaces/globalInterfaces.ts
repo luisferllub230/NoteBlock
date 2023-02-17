@@ -5,8 +5,3 @@ export interface OptionList {
     icon: string;
     listClassName: string;
 }
-
-export interface OptionValues {
-    optionId:number, 
-    newOptionValue:boolean
-}
