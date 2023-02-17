@@ -13,7 +13,7 @@ export class SidebarComponent implements OnInit {
 
   isOptionOpen$ = new BehaviorSubject<boolean>(false);
 
-  //this options  
+  //this options come to the backend 
   optionsList$ = new BehaviorSubject<OptionList[]>([
     {
       id: 1,
