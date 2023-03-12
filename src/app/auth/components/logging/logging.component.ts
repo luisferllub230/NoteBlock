@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { userDataValidation } from '../../interfaces/userDataValidation';
+import { UserLoginServices } from '../../services/userLogin.service';
 
 @Component({
   selector: 'app-logging',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoggingComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userLoginServices: UserLoginServices) { }
+
+  formValidation: userDataValidation = {
+    userName: 'luis',
+    userNickname: 'pedro',
+    userPassword: '123'
+  };
 
   ngOnInit(): void {
+    this.userLoginServices.getLogin(this.formValidation).subscribe( (log)=> console.log("from comp",log) );
   }
 
 }
