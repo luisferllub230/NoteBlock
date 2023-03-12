@@ -10,6 +10,8 @@ const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'logging', component: LoggingComponent},
   {path: 'register', component: RegisterComponent},
+
+  //TODO: CREATE THE ROUTER FOR OTHERS COMPONENTS 
   {path: 'Home', component: HomeComponent},
   {path: '**', component: Page404Component},
 ];
