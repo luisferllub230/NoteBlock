@@ -3,29 +3,42 @@ import { Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { userDataValidation } from '../interfaces/userDataValidation';
+import { userInformation } from '../../interfaces/userInformation';
+import { Select, Store } from "@ngxs/store";
+import { AddUserInformation } from "../../state/User.action";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserLoginServices {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private store: Store) { }
 
   getLogin(userDataValidation: userDataValidation): Observable<any> {
+    const userPassword: string = userDataValidation.userPassword;
+    const userNickname: string = userDataValidation.userNickname;
+    const url = `${environment.API_URL}/login?userPassword=${userPassword}&userNickname=${userNickname}`;
 
-
-    //TODO: USE GET NOT POST FOR validate
-    return this.http.get(`${environment.API_URL}/login`).pipe(
+    return this.http.get<userInformation>(url).pipe(
       map((httpResponse) => {
-        console.log("from interfaces",httpResponse);
+        this.store.dispatch(new AddUserInformation(httpResponse));
+        const userInformation: userInformation = { ...httpResponse }
+        return userInformation;
       }),
-      catchError((err) => this.errorMessage(err))
+      catchError((err) => {
+        this.errorMessage(err)
+        return '';
+      })
     );
   }
 
 
-  errorMessage(err: any): Observable<any> {
-    console.log(err);
-    return throwError(err);
+  errorMessage(err: any) {
+    throwError(err);
+    return {
+      errorType: '',
+      message: '',
+      isError: ''
+    };
   }
 }

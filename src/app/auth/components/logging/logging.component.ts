@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { userInformation } from 'src/app/interfaces/userInformation';
+import { UserState } from 'src/app/state/UserState.state';
 import { userDataValidation } from '../../interfaces/userDataValidation';
 import { UserLoginServices } from '../../services/userLogin.service';
 
@@ -9,16 +13,20 @@ import { UserLoginServices } from '../../services/userLogin.service';
 })
 export class LoggingComponent implements OnInit {
 
+  @Select(UserState.getUserInformation) userInformation$!: Observable<any>;
+  @Select(UserState.getIsUserLogged) isUserLogged$!: Observable<any>;
+
   constructor(private userLoginServices: UserLoginServices) { }
 
   formValidation: userDataValidation = {
-    userName: 'luis',
-    userNickname: 'pedro',
-    userPassword: '123'
+    userNickname: 'marinosapete222',
+    userPassword: 'MyNuevaPassword'
   };
 
   ngOnInit(): void {
-    this.userLoginServices.getLogin(this.formValidation).subscribe( (log)=> console.log("from comp",log) );
+    this.isUserLogged$.subscribe(console.log);
+    this.userInformation$.subscribe((r) => console.log('comp', r))
+    const userInfoLogged = this.userLoginServices.getLogin(this.formValidation).subscribe();
   }
 
 }

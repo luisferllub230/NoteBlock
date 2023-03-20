@@ -1,5 +1,4 @@
 export interface userDataValidation {
-    userName: string | null,
-    userNickname: string | null,
+    userNickname: string,
     userPassword: string
 }

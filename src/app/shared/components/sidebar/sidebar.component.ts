@@ -1,7 +1,7 @@
 import { HtmlParser } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, filter, fromEvent, map, pluck } from 'rxjs';
-import { OptionList } from 'src/app/interfaces/globalInterfaces';
+import { OptionList } from 'src/app/interfaces/optionList';
 import { navOptions } from 'src/app/util/navOptions.enum';
 
 @Component({
